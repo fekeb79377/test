@@ -12,18 +12,18 @@ const userSchema = new mongooose.Schema({
         required: true,
         unique: true
     },
-    Password: {
+    password: {
         type: String,
         required: true
     },
 })
 
-userSchema.methods.hashPassword = async function (enteredPassword) {
-    return await bcrypt.hash(enteredPassword, 10);
+userSchema.methods.hashPassword = async function (password) {
+    return await bcrypt.hash(password, 10);
 }
 
-userSchema.methods.matchPassword = async function (enteredPassword) {
-    return await bcrypt.compare(enteredPassword, this.Password);
+userSchema.methods.matchPassword = async function (password) {
+    return await bcrypt.compare(password, this.Password);
 }
 
 userSchema.methods.generateToken = async function () {
